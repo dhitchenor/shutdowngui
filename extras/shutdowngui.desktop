@@ -1,0 +1,8 @@
+[Desktop Entry]
+Name=ShutdownGUI
+Exec=</path/to/>/shutdowngui-linux_x64
+Terminal=false
+Type=Application
+Icon=</path/to/>/shutdowngui.png
+Comment=ShutdownGUI
+Categories=System;

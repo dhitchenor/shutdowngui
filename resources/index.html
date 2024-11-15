@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ShutdownGUI</title>
+    <link rel="stylesheet" href="/styles.css">
+    <link rel="icon" href="icons/favicon.ico" type="image/x-icon">
+</head>
+<body>
+    <div id="main-container" class="lang-en">
+
+        <div class="hamburger-icon" onclick="toggleMenu()">
+            <div class="bar bar1"></div>
+            <div class="bar bar2"></div>
+            <div class="bar bar3"></div>
+
+            <div class="cross"></div>
+        </div>
+
+        <div class="hamburger-menu" id="menu">
+            <div class="switch-container">
+                <label class="switch">
+                    <input type="checkbox" id="reboot-switch">
+                    <span class="slider round"></span>
+                </label>
+                <label for="reboot-switch" id="reboot-label" class="reboot-label"></label>
+            </div>
+            <select id="lang-dropdown" class="lang-dropdown">
+                <option value="en">English</option>
+                <option value="eo">Esperanto</option>
+                <option value="es">Española</option>
+            </select>
+            <div class="link-container">
+                <div>ShutdownGUI:&nbsp;&nbsp;
+                    <span id="SrcSDG" class="link-source"></span>&nbsp;
+                    <span id="LicSDG" class="link-licence"></span>
+                </div>
+                <div>FeatherIcons:&nbsp;&nbsp;
+                    <span id="SrcFI" class="link-source"></span>&nbsp;
+                    <span id="LicFI" class="link-licence"></span>
+                </div>
+            </div>
+        </div>
+
+        <div class="timename-container">
+            <div id="title-days" class="days-label"></div>
+            <div>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</div>
+            <div id="title-hours" class="hours-label"></div>
+            <div>&nbsp;&nbsp;&nbsp;</div>
+            <div id="title-minutes" class="minutes-label"></div>
+            <div>&nbsp;&nbsp;&nbsp;</div>
+            <div id="title-seconds" class="seconds-label"></div>
+        </div>
+
+        <div id="timer">000:00:00:00</div>
+
+        <div class="input-container">
+            <input type="number" id="input-time" placeholder="0">
+            <select id="time-unit">
+                <!-- <option id="opt-seconds" value="seconds">Seconds</option> -->
+                <option id="opt-minutes" class="minutes-label" value="minutes">Minutes</option>
+                <option id="opt-hours" class="hours-label" value="hours">Hours</option>
+                <option id="opt-days" class="days-label" value="days">Days</option>
+            </select>
+        </div>
+
+        <div class="button-container">
+            <button id="start-button" class="start-button"></button>
+            <button id="add-button" class="add-button" style="display: none;"></button>
+            <button id="cancel-button" class="cancel-button"></button>
+        </div>
+
+        <div id="timeannounce-container" class="timeannounce-container">
+            <div id="shut-down-on" class="shut-down-on"></div>
+            <div>&nbsp;</div>
+            <div id="reboot-on" class="reboot-on"></div>
+            <div>&nbsp;</div>
+            <div id="announce-date"></div>
+            <div>&nbsp;</div>
+            <div id="at-string" class="at-string"></div>
+            <div>&nbsp;</div>
+            <div id="announce-time"></div>
+        </div>
+    </div>
+
+    <script src="/js/neutralino.js"></script>
+    <script src="/js/main.js"></script>
+
+</body>
+</html>

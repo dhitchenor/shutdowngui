@@ -1,0 +1,344 @@
+body {
+    font-family: sans-serif;
+    min-height: 100vh;
+    min-width: 700px;
+    margin: 0;
+    background-color: #353a3c;
+}
+
+#main-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Hamburger Icon */
+.hamburger-icon {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    cursor: pointer;
+    display: block;
+    z-index: 2;
+}
+
+.bar {
+    width: 35px;
+    height: 5px;
+    background-color: white;
+    margin: 6px 0;
+    transition: all 0.3s ease;
+}
+
+.cross {
+    position: absolute;
+    top: 17px;
+    right: 35px;
+    display: none;
+}
+
+.cross::before, .cross::after {
+    content: '';
+    position: absolute;
+    width: 40px;
+    height: 5px;
+    background-color: white;
+    top: 50%;
+    left: 0;
+    transform-origin: center;
+}
+
+.cross::before {
+    transform: rotate(45deg);
+}
+
+.cross::after {
+    transform: rotate(-45deg);
+}
+
+.hamburger-icon.active .bar {
+    display: none;
+}
+
+.hamburger-icon.active .cross {
+    display: block;
+}
+
+/* Hamburger Menu */
+.hamburger-menu {
+    position: fixed;
+    top: 0;
+    right: -255px;
+    height: 100%;
+    width: 190px;
+    background-color: #333;
+    color: white;
+    transition: right 0.3s ease;
+    z-index: 1;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    box-shadow: -5px 0 10px black;
+}
+
+.hamburger-menu input, .hamburger-menu select {
+    margin-top: 10px;
+}
+
+.hamburger-menu.active {
+    right: 0;
+}
+
+/* Switch */
+.switch {
+    position: relative;
+    display: inline-block;
+    width: 60px;
+    height: 34px;
+}
+
+.switch input {
+    opacity: 0;
+    width: 0;
+    height: 0;
+}
+
+.switch-container {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding-top: 40px;
+}
+
+.slider {
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #ccc;
+    -webkit-transition: .4s;
+    transition: .4s;
+}
+
+.slider:before {
+    position: absolute;
+    content: "";
+    height: 26px;
+    width: 26px;
+    left: 4px;
+    bottom: 4px;
+    background-color: white;
+    -webkit-transition: .4s;
+    transition: .4s;
+}
+
+input:checked + .slider {
+    background-color: #2196F3;
+}
+
+input:focus + .slider {
+    box-shadow: 0 0 1px #2196F3;
+}
+
+input:checked + .slider:before {
+    -webkit-transform: translateX(26px);
+    -ms-transform: translateX(26px);
+    transform: translateX(26px);
+}
+
+/* Rounded sliders */
+.slider.round {
+    border-radius: 20px;
+}
+
+.slider.round:before {
+    border-radius: 50%;
+}
+
+/* Links container */
+.link-container {
+    margin-top: auto;
+    margin-bottom: 30px;
+    align-items: left;
+    font-size: 11.5px;
+}
+
+.link-container a {
+  color: white;
+  text-decoration: none;
+}
+.link-container span {
+    display: inline-block;
+    transition: transform 0.2s ease;
+    padding: 2px;
+}
+
+span:hover {
+    transform: scale(1.1);
+}
+
+/* Title */
+.timename-container {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    margin: 20px 0px 0px 40px;
+    font-size: 1rem;
+    color: white;
+}
+
+/* Timer */
+#timer {
+font-size: 3rem;
+text-align: center;
+margin: 0px 0px 10px 0;
+color: white;
+}
+
+/* Input Box and Dropdown */
+.input-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 20px 0;
+}
+
+input[type="number"] {
+    width: 100px;
+    padding: 10px;
+    font-size: 1rem;
+    margin-right: 10px;
+}
+
+select {
+    padding: 10px;
+    font-size: 1rem;
+}
+
+/* Buttons */
+.button-container {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    margin-bottom: 20px;
+}
+
+button {
+    padding: 10px 20px;
+    font-size: 1rem;
+    cursor: pointer;
+}
+
+/* Time Announce */
+.timeannounce-container {
+    display: none;
+    justify-content: left;
+    color: white;
+    font-size: 1.2rem;
+    margin-bottom: 10px;
+}
+
+/* Translations */
+#main-container.lang-en {
+    --link-source: "Source";
+    --link-licence: "Licence";
+    --start-button: "Start";
+    --add-button: "Add";
+    --cancel-button: "Cancel";
+    --reboot-label: "Reboot";
+    --days-label: "Days";
+    --hours-label: "Hours";
+    --minutes-label: "Minutes";
+    --seconds-label: "Seconds";
+    --shut-down-on: "Shutting down on";
+    --reboot-on: "Rebooting on";
+    --at-string: "at";
+    --tray-show: "Show";
+    --tray-quit: "Quit";
+}
+
+#main-container.lang-eo {
+    --link-source: "Fonto";
+    --link-licence: "Licenco";
+    --start-button: "Iniciati";
+    --add-button: "Almeti";
+    --cancel-button: "Nuligi";
+    --reboot-label: "Restarti";
+    --days-label: "Tagoj";
+    --hours-label: "Horoj";
+    --minutes-label: "Minutoj";
+    --seconds-label: "Sekundoj";
+    --shut-down-on: "Sistemfermi sur";
+    --reboot-on: "Restartigi sur";
+    --at-string: "ĉe";
+    --tray-show: "Montri";
+    --tray-quit: "Ĉesi";
+}
+
+#main-container.lang-es {
+    --link-source: "Fuente";
+    --link-licence: "Licencia";
+    --start-button: "Iniciar";
+    --add-button: "Agregar";
+    --cancel-button: "Cancelar";
+    --reboot-label: "Reiniciar";
+    --days-label: "Días";
+    --hours-label: "Horas";
+    --minutes-label: "Minutos";
+    --seconds-label: "Segundos";
+    --shut-down-on: "Cierre de";
+    --reboot-on: "Reiniciando en";
+    --at-string: "en";
+    --tray-show: "Mostrar";
+    --tray-quit: "Dejar";
+}
+
+.link-source::after {
+  content: var(--link-source);
+}
+.link-licence::after {
+  content: var(--link-licence);
+}
+.start-button::after {
+  content: var(--start-button);
+}
+.add-button::after {
+  content: var(--add-button);
+}
+.cancel-button::after {
+  content: var(--cancel-button);
+}
+.reboot-label::after {
+  content: var(--reboot-label);
+}
+.days-label::after {
+  content: var(--days-label);
+}
+.hours-label::after {
+  content: var(--hours-label);
+}
+.minutes-label::after {
+  content: var(--minutes-label);
+}
+.seconds-label::after {
+  content: var(--seconds-label);
+}
+.shut-down-on::after {
+  content: var(--shut-down-on);
+}
+.reboot-on::after {
+  content: var(--reboot-on);
+}
+.at-string::after {
+  content: var(--at-string);
+}
+.tray-show::after {
+  content: var(--tray-show);
+}
+.tray-quit::after {
+  content: var(--tray-quit);
+}
