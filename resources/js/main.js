@@ -14,15 +14,15 @@ let timerActive = false;
 let tray_show = "Show";
 let tray_quit = "Quit";
 
-function openExternalLink(id) {
+async function openExternalLink(id) {
     if(id == "LicSDG") {
-        Neutralino.os.open('https://github.com/dhitchenor/shutdowngui/blob/main/LICENSE');
+        await Neutralino.os.open('https://github.com/dhitchenor/shutdowngui/blob/main/LICENSE');
     } else if(id == "SrcFI") {
-        Neutralino.os.open('https://github.com/feathericons/feather');
+        await Neutralino.os.open('https://github.com/feathericons/feather');
     } else if(id == "LicFI") {
-        Neutralino.os.open('https://github.com/feathericons/feather?tab=MIT-1-ov-file#readme');
+        await Neutralino.os.open('https://github.com/feathericons/feather?tab=MIT-1-ov-file#readme');
     } else {
-        Neutralino.os.open('https://github.com/dhitchenor/shutdowngui');
+        await Neutralino.os.open('https://github.com/dhitchenor/shutdowngui');
     }
 }
 
@@ -133,7 +133,7 @@ function setTimer(reboot, timerDuration) {
     rebootSwitch.disabled = true;
 }
 
-function setTray() {
+async function setTray() {
     tray_quit = removeQuotes(getComputedStyle(document.getElementById("main-container")).getPropertyValue("--tray-quit").trim());
         
     if(timerActive) {
@@ -156,7 +156,7 @@ function setTray() {
         ]
     };
 
-    Neutralino.os.setTray(tray);
+    await Neutralino.os.setTray(tray);
 }
 
 async function onTrayMenuItemClicked(event) {
@@ -172,9 +172,9 @@ async function onTrayMenuItemClicked(event) {
     }
 }
 
-function onWindowClose() {
-    cancelShutdown();
-    Neutralino.app.exit();
+async function onWindowClose() {
+    await cancelShutdown();
+    await Neutralino.app.exit();
 }
 
 function commenceTimer() {
@@ -211,23 +211,22 @@ function cancelTimer() {
     displayTimeAnnounce(false);
 }
 
-document.getElementById("main-container").addEventListener("change", (e) => {
+document.getElementById("main-container").addEventListener("change", async (e) => {
     if(e.target.classList.contains("lang-dropdown")) {
         e.currentTarget.className = "lang-" + e.target.value;
 
         document.getElementById("main-container").classList.remove("lang-en", "lang-eo", "lang-es");
         document.getElementById("main-container").classList.add("lang-" + e.target.value);
             
-        // Update option text based on CSS variable values
         document.querySelector("#opt-minutes").text = removeQuotes(getComputedStyle(document.getElementById("main-container")).getPropertyValue("--minutes-label").trim());
         document.querySelector("#opt-hours").text = removeQuotes(getComputedStyle(document.getElementById("main-container")).getPropertyValue("--hours-label").trim());
         document.querySelector("#opt-days").text = removeQuotes(getComputedStyle(document.getElementById("main-container")).getPropertyValue("--days-label").trim());
     }
     
-    setTray();
+    await setTray();
 });
 
-document.getElementById("main-container").addEventListener("click", (e) => {
+document.getElementById("main-container").addEventListener("click", async (e) => {
     if (e.target.tagName === "BUTTON") {
         const id = e.target.id;
         if(id === "start-button") {
@@ -237,7 +236,7 @@ document.getElementById("main-container").addEventListener("click", (e) => {
         } else if(id === "cancel-button") {
             cancelTimer();
         }
-        setTray();
+        await setTray();
     }
     if(e.target.tagName === "SPAN" && Array.from(e.target.classList).some(cls => cls.startsWith("link-"))) {
         openExternalLink(e.target.id);
@@ -255,7 +254,9 @@ Neutralino.events.on("windowClose", onWindowClose);
 // Set up system tray if not running on macOS
 // Fix https://github.com/neutralinojs/neutralinojs/issues/615
 if(NL_OS != "Darwin") {
-    setTray();
+    (async () => {
+        await setTray();
+    })();
 }
 
 if(NL_OS != "Linux") {
